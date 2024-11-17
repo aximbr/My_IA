@@ -12,6 +12,11 @@ data = pd.read_csv('lsd_math_score_data.csv')
 
 #print(data)
 #print(data['Avg_Math_Test_Score'])
+
+# Add a new column named Test_Subject and assigned the value 'Jennifer Lopez' to all rows
+data['Test_Subject'] = 'Jennifer Lopez'
+print(data)
+
 # Add a new column named High_Score and assigned the value 100 to all rows
 data['High_Score'] = 100
 print(data)
@@ -36,3 +41,25 @@ print(cleandData)
 #Instead to create a variable with list of columns, we can pass a list of desired columns
 cleanData = data[['LSD_ppm', 'Avg_Math_Test_Score']]
 print(cleandData)
+
+#Explain difference between series and dataframe
+y = data[['LSD_ppm']] #here we use a list to obtain a dataframe
+print(y)
+print(type(y))
+
+z = data['LSD_ppm'] #here we use a string to obtain a Serie
+print(z)
+print(type(z))
+
+# Chalenge: create a variable X type DataFrame that contains only the LSD_ppm
+X = data[['LSD_ppm']]
+print(X)
+print(type(X))
+
+#Remove the columm Test_Subject
+del data['Test_Subject']
+print(data)
+
+# Chalenge: Remove the column High_Score
+del data['High_Score']
+print(data)

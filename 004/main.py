@@ -8,8 +8,14 @@
 """
 
 import pandas as pd
+import matplotlib as mplt
 import matplotlib.pyplot as plt
 from sklearn.linear_model import LinearRegression
+
+
+print(plt.get_backend())
+
+mplt.rcParams['toolbar'] = 'None'
 
 data = pd.read_csv('lsd_math_score_data.csv')
 

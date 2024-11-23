@@ -39,49 +39,13 @@ def dg(x):
     """Derivative function"""
     return 4 * x**3 - 8 * x
 
-
-# main()
-clear()
-
-# Make Data - generate an array of 1000 numbers starting at -2 and ending at 2
-x_2 = np.linspace(start=-2, stop=2, num=1000)
-
-
-# # Create a figure and put both graph together
-plt.figure(figsize=[20, 5])
-
-# #create the first graph (subplot)
-plt.subplot(1, 2, 1)
-plt.xlim(-2, 2)
-plt.ylim(0.5, 5.5)
-plt.xlabel("x", fontsize=14)
-plt.ylabel("g(x)", fontsize=14)
-plt.title("Cost function")
-plt.plot(x_2, g(x_2), color="blue", linewidth=3, alpha=0.8)
-# values = np.array(x_list)
-# plt.scatter(x_list,f(values), color='red', s=100, alpha=0.6)
-
-# create the second graph (subplot)
-plt.subplot(1, 2, 2)
-plt.xlabel("x", fontsize=14)
-plt.ylabel("dg(x)", fontsize=14)
-plt.title("Slope of Cost function")
-plt.xlim(-2, 3)
-plt.ylim(-6, 8)
-plt.grid()
-plt.plot(x_2, dg(x_2), color="skyblue", linewidth=5, alpha=0.6)
-# plt.scatter(x_list, slope_list, color='red', s=100, alpha=0.5)
-
-
-# show the figure and subplots
-plt.show()
-
-
 # Gradient Descend as Python Funtion
-
-
-def gradient_descent(derivative_func, initial_guess, multiplier, precision):
-    """Gradient Descent function"""
+def gradient_descent(derivative_func, initial_guess, multiplier=0.02, precision=0.0001):
+    """
+    Gradient Descent function
+    default value for multiplier is 0.02
+    default value for precision is 0.0001
+    """
     new_x = initial_guess  # first guess
     x_list = [new_x]
     slope_list = [derivative_func(new_x)]
@@ -97,14 +61,53 @@ def gradient_descent(derivative_func, initial_guess, multiplier, precision):
 
         if step_size < precision:
             break
-
     return new_x, x_list, slope_list
 
 
-local_min, list_x, deriv_list = gradient_descent(dg, 0.5, 0.02, 0.001)
+# main()
+clear()
+
+# Make Data - generate an array of 1000 numbers starting at -2 and ending at 2
+x_2 = np.linspace(start=-2, stop=2, num=1000)
+
+# Call the Gradient Descent function:
+local_min, list_x, deriv_list = gradient_descent(derivative_func=dg, initial_guess=0)
+# # Create a figure and put graphs together
+plt.figure(figsize=[20, 5])
+
+# #create the first graph (subplot)
+plt.subplot(1, 2, 1)
+plt.xlim(-2, 2)
+plt.ylim(0.5, 5.5)
+plt.xlabel("x", fontsize=14)
+plt.ylabel("g(x)", fontsize=14)
+plt.title("Cost function")
+plt.plot(x_2, g(x_2), color="blue", linewidth=3, alpha=0.8)
+plt.scatter(list_x, g(np.array(list_x)), color='red', s=100, alpha=0.6)
+
+# create the second graph (subplot)
+plt.subplot(1, 2, 2)
+plt.xlabel("x", fontsize=14)
+plt.ylabel("dg(x)", fontsize=14)
+plt.title("Slope of Cost function")
+plt.xlim(-2, 3)
+plt.ylim(-6, 8)
+plt.grid()
+plt.plot(x_2, dg(x_2), color="skyblue", linewidth=5, alpha=0.6)
+plt.scatter(list_x, deriv_list, color='red', s=100, alpha=0.5)
+
+
+# show the figure and subplots
+plt.show()
+
+
+
+
+
+
 
 print("The Local min occurs at ", local_min)
-print("The number of step is", len(list_x))
+print("The number of step: ", len(list_x))
 
 
 # # Create a figure and put both graph together

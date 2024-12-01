@@ -1,10 +1,10 @@
 """
 # Author: Jose P. Leitao
-# 2024-11-29
+# 2024-11-30
 # This program is used to trainning IA with Python
 # based on "Complete Data Science & Machine Learning Bootcamp - Python 3" Course
-# Lesson 4.16
-# Objective: Transposing and Reshaping Arrays
+# Lesson 4.19
+# Objective: Implementing MSE function
 """
 
 # Import section

@@ -27,7 +27,7 @@ clear()
 # Make data for thetas
 NR_THETAS = 5
 
-# 1D arrays
+# Create 2 1D arrays
 th_0 = np.linspace(start=-1, stop=3, num=NR_THETAS)
 th_1 = np.linspace(start=-1, stop=3, num=NR_THETAS)
 

@@ -1,28 +1,28 @@
 """
 # Author: Jose P. Leitao
-# 2024-12-02
+# 2024-12-09
 # This program is used to trainning IA with Python
 # based on "Complete Data Science & Machine Learning Bootcamp - Python 3" Course
-# Lesson 4.21, 4.22
-# Objective: MSE function and partial derivative
+# Lesson 4.21, 4.22, 4.23
+# Objective: MSE function, partial derivative and plotting the graphic
 """
 
 # Import section
 from os import system, name
-# import matplotlib as mplt
-# import matplotlib.pyplot as plt
+import matplotlib as mplt
+import matplotlib.pyplot as plt
 import numpy as np
 #from sklearn.linear_model import LinearRegression
 #from sklearn.metrics import mean_squared_error
-#from mpl_toolkits.mplot3d.axes3d import Axes3D
-#from matplotlib import cm #Color Map
+# from mpl_toolkits.mplot3d.axes3d import Axes3D
+# from matplotlib import cm #Color Map
 #List of Color Maps:
 # https://matplotlib.org/stable/users/explain/colors/colormaps.html#colormaps
 
 
 
 # Hide the toolbar when showing the figure
-# mplt.rcParams["toolbar"] = "None"
+mplt.rcParams["toolbar"] = "None"
 
 # define our clear function
 def clear():
@@ -59,7 +59,7 @@ def grad(x, y, thetas):
 clear()
 
 # Make data for thetas
-# NR_THETAS = 200
+NR_THETAS = 200
 
 # Make sample data
 # To use Linear Regression class, the Array should be on 2 dimension, it's necessary "reshape"
@@ -80,9 +80,17 @@ MULTIPLIER = 0.01
 # Define our initial guess
 thetas = np.array([2.9, 2.9])
 
+# Variable to scatter plot (1 row, 2 columns)
+plot_vals = thetas.reshape(1,2)
+mse_vals = mse(y_5, thetas[0] + thetas[1]*x_5)
+
 # Calculate new thetas 1000 times
 for i in range(1000):
     thetas = thetas - MULTIPLIER * grad(x_5, y_5, thetas)
+    # Append new values to plot_vals and mse_vals in 2 different ways
+    plot_vals = np.concatenate((plot_vals, thetas.reshape(1,2)), axis=0)
+    mse_vals = np.append(arr=mse_vals, values=mse(y_5, thetas[0] + thetas[1]*x_5))
+
 
 # Print out results
 print('Min occurs at Theta_0 : ', thetas[0])
@@ -90,11 +98,11 @@ print('Min occurs at Theta_1 : ', thetas[1])
 print('MSE is : ', mse(y_5, thetas[0] + thetas[1]*x_5))
 
 # Create 2 1D arrays
-# th_0 = np.linspace(start=-1, stop=3, num=NR_THETAS)
-# th_1 = np.linspace(start=-1, stop=3, num=NR_THETAS)
+th_0 = np.linspace(start=-1, stop=3, num=NR_THETAS)
+th_1 = np.linspace(start=-1, stop=3, num=NR_THETAS)
 
 # Create a tuple with 2D array
-# plot_t0, plot_t1 = np.meshgrid(th_0, th_1)
+plot_t0, plot_t1 = np.meshgrid(th_0, th_1)
 
 # print('Shape of th0 is ', th_0.shape)
 # print('Shape for plot_t0 is ', plot_t0.shape)
@@ -103,32 +111,33 @@ print('MSE is : ', mse(y_5, thetas[0] + thetas[1]*x_5))
 # will use a nested loop
 #
 # create a 2D arrays of zeros with same number of rows and columns
-# plot_cost = np.zeros((NR_THETAS,NR_THETAS))
+plot_cost = np.zeros((NR_THETAS,NR_THETAS))
 #print(plot_cost)
 
-# for i in range(NR_THETAS):
-#     for j in range(NR_THETAS):
-#         # calculate the predict value (y_hat) with out set of thetas
-#         y_hat = plot_t0[i][j] + plot_t1[i][j] * x_5
-#         # fill our plot array with MSE calculated from actual value and predicted value
-#         plot_cost[i][j] = mse(y_5, y_hat)
+for i in range(NR_THETAS):
+    for j in range(NR_THETAS):
+        # calculate the predict value (y_hat) with out set of thetas
+        y_hat = plot_t0[i][j] + plot_t1[i][j] * x_5
+        # fill our plot array with MSE calculated from actual value and predicted value
+        plot_cost[i][j] = mse(y_5, y_hat)
 
 # print('Shape of plot_t0 is ', plot_t0.shape)
 # print('Shape of plot_t1 is ', plot_t1.shape)
 # print('Shape of plot_cost is ', plot_cost.shape)
 
 # Plotting MSE
-# fig = plt.figure(figsize=[16,12])
-# ax = fig.add_subplot(projection='3d')
+fig = plt.figure(figsize=[16,12])
+ax = fig.add_subplot(projection='3d')
 
-# ax.set_xlabel('Theta 0', fontsize=20)
-# ax.set_ylabel('Theta 1', fontsize=20)
-# ax.set_zlabel('Cost / MSE', fontsize=20)
+ax.set_xlabel('Theta 0', fontsize=20)
+ax.set_ylabel('Theta 1', fontsize=20)
+ax.set_zlabel('Cost / MSE', fontsize=20)
 
-# ax.plot_surface(plot_t0, plot_t1, plot_cost, cmap='hot')
+ax.scatter(plot_vals[:,0],plot_vals[:,1],mse_vals, s=80, color='black' )
+ax.plot_surface(plot_t0, plot_t1, plot_cost, cmap='rainbow', alpha=0.4)
 
 # show the figure
-# plt.show()
+plt.show()
 
 # Print values
 # print('Min value for plot_cost is ', plot_cost.min())

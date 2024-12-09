@@ -12,10 +12,7 @@ from os import system, name
 import matplotlib as mplt
 import matplotlib.pyplot as plt
 import numpy as np
-#from sklearn.linear_model import LinearRegression
-#from sklearn.metrics import mean_squared_error
-# from mpl_toolkits.mplot3d.axes3d import Axes3D
-# from matplotlib import cm #Color Map
+
 #List of Color Maps:
 # https://matplotlib.org/stable/users/explain/colors/colormaps.html#colormaps
 
@@ -93,9 +90,9 @@ for i in range(1000):
 
 
 # Print out results
-print('Min occurs at Theta_0 : ', thetas[0])
-print('Min occurs at Theta_1 : ', thetas[1])
-print('MSE is : ', mse(y_5, thetas[0] + thetas[1]*x_5))
+# print('Min occurs at Theta_0 : ', thetas[0])
+# print('Min occurs at Theta_1 : ', thetas[1])
+# print('MSE is : ', mse(y_5, thetas[0] + thetas[1]*x_5))
 
 # Create 2 1D arrays
 th_0 = np.linspace(start=-1, stop=3, num=NR_THETAS)
@@ -139,10 +136,3 @@ ax.plot_surface(plot_t0, plot_t1, plot_cost, cmap='rainbow', alpha=0.4)
 # show the figure
 plt.show()
 
-# Print values
-# print('Min value for plot_cost is ', plot_cost.min())
-# Show the value of theta_0 when we have the min MSE
-# ij_min = np.unravel_index(indices=plot_cost.argmin(), shape=plot_cost.shape)
-# print('Min occurs at (i,j)', ij_min)
-# print('Min MSE for theta 0 for plot_t0 [111][91] is ', plot_t0[111][91])
-# print('Min MSE for theta 1 for plot_t1 [111][91] is ', plot_t1[111][91])

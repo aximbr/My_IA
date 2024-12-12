@@ -3,7 +3,7 @@
 # 2024-12-11
 # This program is used to trainning IA with Python
 # based on "RealPython lesson - linear regression in Python" Course
-# Lessons 5, 6
+# Lessons 5, 6, 7
 # Objective: Polynomial Regression
 """
 
@@ -68,3 +68,43 @@ print('The coeficient is an array ', model.coef_)
 print('The actual values of y are ', y)
 print('The predict values for y are ', model.predict(x_))
 print('The difference between y and predict_y is ', y - model.predict(x_))
+
+# Now let's assume x is 2D form
+x = [[0,1], [5,1], [15,2], [25,5], [35,11], [45,15], [55,34], [60,35]]
+
+# Our data points
+y = [4, 5, 20, 14, 32, 22, 38, 43]
+
+x = np.array(x)
+y = np.array(y)
+
+x_ = PolynomialFeatures(degree=2, include_bias=False).fit_transform(x)
+
+print(x_)
+# For each row we have the first and second term of observation,
+# the theird is the first term to square, 
+# the forth is the first term x second term
+# and the last element of the row is second term to square
+
+# # Let's create an object from class LinearRegression that will be our model
+model=LinearRegression()
+
+# Let's feed the data to this model
+model.fit(x_, y)
+
+# How good is our model? Check out using r square and input our observations
+print('The new R Square for our data points is ', model.score(x_,y))
+
+# Now our new model contains the intercept and coeficient values:
+# b0
+print('The intercept is scalar', model.intercept_)
+# b1, b2 for x1 and x2
+# b3 for x1²
+# b4 for x1x2
+# b5 for x2²
+print('The coeficient is an array ', model.coef_)
+
+# Let's compare our prediction model with observed data
+# print('The actual values of y are ', y)
+# print('The predict values for y are ', model.predict(x_))
+# print('The difference between y and predict_y is ', y - model.predict(x_))

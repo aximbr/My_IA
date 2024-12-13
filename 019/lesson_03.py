@@ -24,8 +24,19 @@ def clear():
         _ = system("clear")
 
 
+
+# 1 - read/import/create observation data
+# 2 - make them on array format
+# 3 - generate the transform for X observation (x_)
+# 4 - create a object of class LinearRegression (model)
+# 5 - fit the model with transform (x_) and data result (y)
+# 6 - check the R Square to verify how good is our model
+# 7 - find the coeficients b0, b1, b2, ...
+# 8 - compare our model (predict values) against actual values (y)
+# 9 - do some predictions with new X values
+
 # Main()
-clear()
+# clear()
 
 # Create some dummy points.
 x = [5, 15, 25, 35, 45, 55]
@@ -103,8 +114,3 @@ print('The intercept is scalar', model.intercept_)
 # b4 for x1x2
 # b5 for x2²
 print('The coeficient is an array ', model.coef_)
-
-# Let's compare our prediction model with observed data
-# print('The actual values of y are ', y)
-# print('The predict values for y are ', model.predict(x_))
-# print('The difference between y and predict_y is ', y - model.predict(x_))

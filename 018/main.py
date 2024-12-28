@@ -38,7 +38,7 @@ def mse(y, y_hat_in):
     # instead a scalar
     return np.average((y-y_hat_in)**2, axis=0)[0]
 
-# Partial derivative of MSE wrt theta_0 is
+# Partial derivative of MSE wrt theta_0 and theta_1
 def grad(x, y, thetas):
     """ x values, y values, thetas is array of theta parameters
     theta_0 at index 0, theta_1 at index 1"""
@@ -126,12 +126,17 @@ for i in range(NR_THETAS):
 fig = plt.figure(figsize=[16,12])
 ax = fig.add_subplot(projection='3d')
 
+
 ax.set_xlabel('Theta 0', fontsize=20)
 ax.set_ylabel('Theta 1', fontsize=20)
 ax.set_zlabel('Cost / MSE', fontsize=20)
 
-ax.scatter(plot_vals[:,0],plot_vals[:,1],mse_vals, s=80, color='black' )
+# plot the surficie
 ax.plot_surface(plot_t0, plot_t1, plot_cost, cmap='rainbow', alpha=0.4)
+
+# plot the thetas until minimize our cost function
+ax.scatter(plot_vals[:,0],plot_vals[:,1],mse_vals, s=80, color='black' )
+
 
 # show the figure
 plt.show()

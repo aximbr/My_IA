@@ -47,7 +47,7 @@ data['PRICE'] = boston_dataset.target
 
 # Visualising Data prices
 plt.figure(figsize=(10,6))
-plt.hist(data["PRICE"], bins=50, ec='black', color='#2196f3')
+plt.hist(data["PRICE"], bins=50, edgecolor='black', color='#2196f3')
 # Look on this website for color codes
 # https://www.materialpalette.com/
 plt.xlabel('Price of houses in 000s')
